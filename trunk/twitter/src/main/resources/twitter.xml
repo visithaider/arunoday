@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/integration"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:tool="http://www.springframework.org/schema/tool"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:mail="http://www.springframework.org/schema/integration/mail"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-1.0.xsd
+					 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+						http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+						http://www.springframework.org/schema/tool http://www.springframework.org/schema/tool/spring-tool-3.0.xsd
+						http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.0.xsd
+ 						http://www.springframework.org/schema/integration/mail http://www.springframework.org/schema/integration/mail/spring-integration-mail-1.0.xsd">
+
+
+	<beans:bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+		p:location="twitter.properties" p:ignoreUnresolvablePlaceholders="true" />
+
+	<!-- STEP 1 -->
+	<!--  Reads tweets from Twitter using Twitter4J -->
+	<beans:bean id="tweetReader"
+		class="net.arunoday.springintegration.twitter.TwitterMessageSource"
+		p:password="${twitter.password}" p:userId="${twitter.userId}" />
+
+	<channel id="inboundTweetsChannel" />
+
+	<!-- Channel Adapter to poll twitter for new tweets -->
+	<inbound-channel-adapter id="tweetReaderAdapter"
+		ref="tweetReader" channel="inboundTweetsChannel">
+		<poller receive-timeout="10000" max-messages-per-poll="100">
+			<interval-trigger time-unit="SECONDS" interval="10" />
+		</poller>
+	</inbound-channel-adapter>
+
+	<!-- STEP 2 -->
+	<!-- Based on source route tweets to different channels -->
+	<header-value-router id="tweetSourceRouter"
+		input-channel="inboundTweetsChannel" header-name="source">
+		<mapping value="DZone.com" channel="DZoneSourceChannel" />
+		<mapping value="web" channel="webSourceChannel" />
+	</header-value-router>
+
+	<channel id="DZoneSourceChannel" />
+	<channel id="webSourceChannel" />
+
+	<!-- Simply logs the tweets received on web channel -->
+	<beans:bean id="webMessageProcessor"
+		class="net.arunoday.springintegration.twitter.WebMessageProcessor" />
+
+	<service-activator input-channel="webSourceChannel"
+		ref="webMessageProcessor" method="announce" />
+
+	<!-- STEP 3 -->
+	<!-- Transforms the tweet into MailMessage -->
+	<transformer input-channel="DZoneSourceChannel"
+		output-channel="mailChannel" ref="tweetTransformer" />
+
+	<channel id="mailChannel" />
+
+	<!-- Sends tweets from DZone to Gmail -->
+	<mail:outbound-channel-adapter channel="mailChannel"
+		mail-sender="mailSender" />
+
+	<beans:bean id="tweetTransformer"
+		class="net.arunoday.springintegration.twitter.TweetTransformer">
+		<beans:property name="mailMessage" ref="mailMessage" />
+	</beans:bean>
+
+	<!-- Email SetUp -->
+	<beans:bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<beans:property name="host" value="smtp.gmail.com" />
+		<beans:property name="port" value="25" />
+		<beans:property name="username" value="${gmail.username}" />
+		<beans:property name="password" value="${gmail.password}" />
+		<beans:property name="javaMailProperties">
+			<beans:props>
+				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+				<!-- Use SMTP-AUTH to authenticate to SMTP server -->
+				<beans:prop key="mail.smtp.auth">true</beans:prop>
+				<!-- Use TLS to encrypt communication with SMTP server -->
+				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+
+	<!-- Mail message -->
+	<beans:bean id="mailMessage" class="org.springframework.mail.SimpleMailMessage">
+		<beans:property name="from">
+			<beans:value><![CDATA[Twitter-SI-Demo <spring-integ@example.org>]]></beans:value>
+		</beans:property>
+		<beans:property name="to">
+			<beans:value><![CDATA[Aparna Chaudhary <aparna.chaudhary@gmail.com>]]></beans:value>
+		</beans:property>
+		<beans:property name="subject" value="New Article on DZone" />
+	</beans:bean>
+
+</beans:beans>
+	
