@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Aparna Chaudhary ( aparna.chaudhary@gmail.com )
  */
 @Repository
-@Transactional(readOnly=false)
+@Transactional(readOnly = false)
 public abstract class AbstractJpaReadWriteRepository<T extends BasicEntity> extends AbstractJpaReadRepository<T>
         implements ReadWriteRepository<T> {
 

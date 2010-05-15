@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Aparna Chaudhary ( aparna.chaudhary@gmail.com )
  */
 @Repository
-@Transactional(readOnly=true)
+@Transactional(readOnly = true)
 public abstract class AbstractJpaReadRepository<T extends BasicEntity> implements ReadRepository<T> {
 
     private final Class<T> clazz;
@@ -61,9 +61,9 @@ public abstract class AbstractJpaReadRepository<T extends BasicEntity> implement
      */
     @SuppressWarnings("unchecked")
     public List<T> findAll() {
-		// org.hibernate.Session session = (Session)
-		// getEntityManager().getDelegate();
-		// return session.createCriteria(Country.class).list();
-         return getEntityManager().createQuery("select e from " + getEntityClass().getName() + " e").getResultList();
+        // org.hibernate.Session session = (Session)
+        // getEntityManager().getDelegate();
+        // return session.createCriteria(Country.class).list();
+        return getEntityManager().createQuery("select e from " + getEntityClass().getName() + " e").getResultList();
     }
 }

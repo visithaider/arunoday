@@ -10,7 +10,7 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.model.IModel;
 
 /**
- *
+ * 
  * @author Aparna Chaudhary (aparna.chaudhary@gmail.com)
  */
 public interface AjaxButtonColumnCallback extends Serializable {

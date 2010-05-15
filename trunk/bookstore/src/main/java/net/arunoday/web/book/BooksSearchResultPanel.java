@@ -16,56 +16,44 @@ import com.inmethod.grid.datagrid.DefaultDataGrid;
  */
 public abstract class BooksSearchResultPanel extends Panel {
 
-	/**
-	 * @param id
-	 *            comp id (not null)
-	 * @param searchTermModel
-	 *            model that give the book title to search for
-	 */
-	public BooksSearchResultPanel(String id, IModel searchTermModel) {
-		super(id);
-		setOutputMarkupId(true);
-		initGUI(searchTermModel);
-	}
+    /**
+     * @param id comp id (not null)
+     * @param searchTermModel model that give the book title to search for
+     */
+    public BooksSearchResultPanel(String id, IModel searchTermModel) {
+        super(id);
+        setOutputMarkupId(true);
+        initGUI(searchTermModel);
+    }
 
-	/**
-	 * Initialize the UI.
-	 * 
-	 * @param searchTermModel
-	 *            the model that contains the search term
-	 */
-	private void initGUI(IModel searchTermModel) {
+    /**
+     * Initialize the UI.
+     * 
+     * @param searchTermModel the model that contains the search term
+     */
+    private void initGUI(IModel searchTermModel) {
 
-		DataGridFactory dataGridFactory = new DataGridFactory(
-				new SearchBooksDataSource(searchTermModel));
-		dataGridFactory
-				.setItemSelectionChangedCallback(new ItemSelectionChangedCallback() {
-					public void onItemSelectionChanged(
-							AjaxRequestTarget target, IModel item) {
-						onBookSelect(target, (BookDetachableModel) item);
-					}
-				});
+        DataGridFactory dataGridFactory = new DataGridFactory(new SearchBooksDataSource(searchTermModel));
+        dataGridFactory.setItemSelectionChangedCallback(new ItemSelectionChangedCallback() {
+            public void onItemSelectionChanged(AjaxRequestTarget target, IModel item) {
+                onBookSelect(target, (BookDetachableModel) item);
+            }
+        });
 
-		dataGridFactory.addDefaultPropertyColumn("title", "title", 130, true,
-				true);
-		dataGridFactory.addDefaultPropertyColumn("isbn", "isbn", 100, true,
-				true);
-        dataGridFactory.addDefaultPropertyColumn("price", "price", 100, false,
-                false);
-        dataGridFactory.addDefaultPropertyColumn("pageCount", "pageCount", 100, false,
-                false);
+        dataGridFactory.addDefaultPropertyColumn("title", "title", 130, true, true);
+        dataGridFactory.addDefaultPropertyColumn("isbn", "isbn", 100, true, true);
+        dataGridFactory.addDefaultPropertyColumn("price", "price", 100, false, false);
+        dataGridFactory.addDefaultPropertyColumn("pageCount", "pageCount", 100, false, false);
 
-		DefaultDataGrid defaultDataGrid = dataGridFactory
-				.createDefaultDataGrid("grid");
-		defaultDataGrid.setCleanSelectionOnPageChange(true);
-		defaultDataGrid.setClickRowToSelect(true);
-		defaultDataGrid.setAllowSelectMultiple(false);
-		defaultDataGrid.setRowsPerPage(10);
-		defaultDataGrid.setOutputMarkupId(true);
-		defaultDataGrid.setMarkupId("booksSearchResults");
-		add(defaultDataGrid);
-	}
+        DefaultDataGrid defaultDataGrid = dataGridFactory.createDefaultDataGrid("grid");
+        defaultDataGrid.setCleanSelectionOnPageChange(true);
+        defaultDataGrid.setClickRowToSelect(true);
+        defaultDataGrid.setAllowSelectMultiple(false);
+        defaultDataGrid.setRowsPerPage(10);
+        defaultDataGrid.setOutputMarkupId(true);
+        defaultDataGrid.setMarkupId("booksSearchResults");
+        add(defaultDataGrid);
+    }
 
-	abstract protected void onBookSelect(AjaxRequestTarget target,
-			BookDetachableModel model);
+    abstract protected void onBookSelect(AjaxRequestTarget target, BookDetachableModel model);
 }

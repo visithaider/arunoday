@@ -11,17 +11,17 @@ import org.apache.wicket.model.IModel;
  */
 public abstract class BasePage extends WebPage {
 
-	/**
-	 * Constructor
-	 */
-	public BasePage() {
-		add(new Label("title", getTitleModel()));
+    /**
+     * Constructor
+     */
+    public BasePage() {
+        add(new Label("title", getTitleModel()));
 
-	}
+    }
 
-	/**
-	 * @return
-	 */
-	protected abstract IModel<?> getTitleModel();
+    /**
+     * @return
+     */
+    protected abstract IModel<?> getTitleModel();
 
 }
