@@ -15,5 +15,5 @@ import org.apache.wicket.model.IModel;
  */
 public interface ItemSelectionChangedCallback extends Serializable {
 
-	void onItemSelectionChanged(AjaxRequestTarget target, IModel item);
+    void onItemSelectionChanged(AjaxRequestTarget target, IModel item);
 }

@@ -10,6 +10,6 @@ package net.arunoday.model;
  */
 public enum BindingType {
 
-	HARDCOVER, SOFTBOUND
+    HARDCOVER, SOFTBOUND
 
 }
