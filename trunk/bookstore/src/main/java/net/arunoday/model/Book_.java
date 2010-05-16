@@ -10,4 +10,5 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(net.arunoday.model.Book.class)
 public class Book_ {
     public static volatile SingularAttribute<Book, String> title;
+    public static volatile SingularAttribute<Book, String> isbn;
 }

@@ -1,11 +1,6 @@
 /**
  * <TODO: Add Copyright>
  *
- * FILE        : BasicEntity.java
- *
- * PACKAGE     : demo.model
- *
- * CREATION DT : May 14, 2010
  */
 
 package net.arunoday.model;

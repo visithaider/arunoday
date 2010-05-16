@@ -14,6 +14,7 @@ import com.inmethod.grid.datagrid.DefaultDataGrid;
  * This panel displays the search results of the book to find.
  * 
  */
+@SuppressWarnings("serial")
 public abstract class BooksSearchResultPanel extends Panel {
 
     /**

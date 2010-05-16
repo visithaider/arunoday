@@ -1,7 +1,6 @@
 package net.arunoday;
 
 import junit.framework.TestCase;
-
 import net.arunoday.web.HomePage;
 import net.arunoday.web.WicketApplication;
 

@@ -31,4 +31,12 @@ public interface BookRepository extends ReadWriteRepository<Book> {
      */
     List<Book> findBooksByISBN(String isbn);
 
+    /**
+     * Finds books either by author or by title.
+     * 
+     * @param searchToken could be a word from author name or title
+     * @return books that matches the given search token
+     */
+    List<Book> findBooks(String searchToken);
+
 }
