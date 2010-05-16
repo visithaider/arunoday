@@ -11,6 +11,7 @@ import org.apache.wicket.model.Model;
  * 
  * @author Aparna Chaudhary (aparna.chaudhary@gmail.com)
  */
+@SuppressWarnings("serial")
 public class SearchBooksPanel extends Panel {
 
     public SearchBooksPanel(String id, final IModel searchBookModel) {

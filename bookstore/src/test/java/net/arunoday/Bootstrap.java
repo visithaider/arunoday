@@ -1,11 +1,8 @@
 package net.arunoday;
 
-import net.arunoday.model.Book;
 import net.arunoday.repository.BookRepository;
 
 import org.apache.log4j.Logger;
-import org.hibernate.envers.AuditReader;
-import org.hibernate.envers.AuditReaderFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -21,11 +18,10 @@ public class Bootstrap {
         BookRepository bookRepository = (BookRepository) context.getBean("bookRepository");
         logger.info(bookRepository.findAll().size());
 
-        logger.info(bookRepository.findBooksByTitle("DD").size());
-        
-        Book book = new Book("New Book");
-        bookRepository.save(book);
-        
-        
+        logger.info(bookRepository.findBooks("aparna").size());
+
+        // Book book = new Book("New Book");
+        // bookRepository.save(book);
+
     }
 }

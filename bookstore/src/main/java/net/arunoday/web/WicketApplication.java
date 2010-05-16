@@ -1,9 +1,15 @@
 package net.arunoday.web;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import net.arunoday.web.book.SearchBooksPage;
 
+import org.apache.log4j.Logger;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
+import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.jpa.Search;
 import org.wicketstuff.annotation.scan.AnnotatedMountScanner;
 
 /**
@@ -13,11 +19,17 @@ import org.wicketstuff.annotation.scan.AnnotatedMountScanner;
  * @see net.arunoday.Start#main(String[])
  */
 public class WicketApplication extends WebApplication {
+    /** The log4j logger for this class. */
+    private static final Logger logger = Logger.getLogger(WicketApplication.class);
+
     /**
      * Constructor
      */
     public WicketApplication() {
     }
+
+    @PersistenceContext
+    EntityManager entityManager;
 
     @Override
     protected void init() {
@@ -34,6 +46,14 @@ public class WicketApplication extends WebApplication {
         getMarkupSettings().setStripWicketTags(true);
         getMarkupSettings().setDefaultBeforeDisabledLink("");
         getMarkupSettings().setDefaultAfterDisabledLink("");
+
+        FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
+        try {
+            fullTextEntityManager.createIndexer().startAndWait();
+        }
+        catch (InterruptedException e) {
+            logger.error("Indexing of data failed", e);
+        }
 
     }
 
