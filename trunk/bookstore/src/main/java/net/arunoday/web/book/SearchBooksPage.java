@@ -18,7 +18,7 @@ import org.wicketstuff.annotation.mount.MountPath;
  * 
  * @author Aparna Chaudhary (aparna.chaudhary@gmail.com)
  */
-@MountPath(path = "books/search")
+@MountPath(path = "search")
 @SuppressWarnings("unchecked")
 public class SearchBooksPage extends BasePage {
 

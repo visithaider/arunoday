@@ -3,7 +3,7 @@ package net.arunoday.web;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import net.arunoday.web.book.SearchBooksPage;
+import net.arunoday.web.book.ListBooksPage;
 
 import org.apache.log4j.Logger;
 import org.apache.wicket.protocol.http.WebApplication;
@@ -60,8 +60,8 @@ public class WicketApplication extends WebApplication {
     /**
      * @see org.apache.wicket.Application#getHomePage()
      */
-    public Class<SearchBooksPage> getHomePage() {
-        return SearchBooksPage.class;
+    public Class<ListBooksPage> getHomePage() {
+        return ListBooksPage.class;
     }
 
 }
