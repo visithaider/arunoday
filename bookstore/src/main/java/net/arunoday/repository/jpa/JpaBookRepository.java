@@ -86,7 +86,8 @@ public class JpaBookRepository extends AbstractJpaReadWriteRepository<Book> impl
      * @see net.arunoday.repository.BookRepository#findBooks(java.lang.String)
      */
     @SuppressWarnings("unchecked")
-    public List<Book> findBooks(String title) {
+    public List<Book> findBooks(String searchToken) {
+        
         FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(getEntityManager());
         // create native Lucene query
         String[] fields = new String[] { "title", "authors.name", "publishingDate" };
@@ -94,7 +95,7 @@ public class JpaBookRepository extends AbstractJpaReadWriteRepository<Book> impl
                 Version.LUCENE_29));
         Query query = null;
         try {
-            query = parser.parse(title);
+            query = parser.parse(searchToken);
         }
         catch (ParseException e) {
             e.printStackTrace();

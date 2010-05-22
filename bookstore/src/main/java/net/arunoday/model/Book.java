@@ -132,14 +132,14 @@ public class Book extends BasicEntity {
     /**
      * @return Returns the price.
      */
-    public float getPrice() {
+    public Float getPrice() {
         return price;
     }
 
     /**
      * @param price The price to set.
      */
-    public void setPrice(float price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
@@ -174,14 +174,14 @@ public class Book extends BasicEntity {
     /**
      * @return Returns the pageCount.
      */
-    public int getPageCount() {
+    public Integer getPageCount() {
         return pageCount;
     }
 
     /**
      * @param pageCount The pageCount to set.
      */
-    public void setPageCount(int pageCount) {
+    public void setPageCount(Integer pageCount) {
         this.pageCount = pageCount;
     }
 

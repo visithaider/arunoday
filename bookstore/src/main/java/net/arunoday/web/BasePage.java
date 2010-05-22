@@ -15,7 +15,7 @@ public abstract class BasePage extends WebPage {
      * Constructor
      */
     public BasePage() {
-        add(new Label("title", getTitleModel()));
+        add(new Label("pageTitle", getTitleModel()));
 
     }
 
