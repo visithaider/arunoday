@@ -1,0 +1,8 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+A sample app to demonstrate Grails usage.
+
+
+= Details =
