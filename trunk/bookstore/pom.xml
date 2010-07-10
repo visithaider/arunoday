@@ -129,6 +129,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
 			<scope>test</scope>
@@ -148,19 +153,18 @@
 		</dependency>
 
 
-		<!-- Hibernate -->
+		<!-- Hibernate Dependencies -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>3.5.1-Final</version>
 		</dependency>
+		<!--
 
-		<dependency>
-			<groupId>org.hibernate</groupId>
+			<dependency> <groupId>org.hibernate</groupId>
 			<artifactId>hibernate-annotations</artifactId>
-			<version>3.5.1-Final</version>
-		</dependency>
-
+			<version>3.5.1-Final</version> </dependency>
+		-->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
@@ -247,7 +251,17 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.14</version>
 		</dependency>
-
+		<dependency>
+			<groupId>javax.jms</groupId>
+			<artifactId>jms</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-core</artifactId>
+			<version>5.2.0</version>
+		</dependency>
+		
 
 		<!--  JETTY DEPENDENCIES FOR TESTING  -->
 		<dependency>
@@ -331,7 +345,6 @@
 						<artifactId>mysql-connector-java</artifactId>
 						<version>5.1.5</version>
 						<type>jar</type>
-						<scope>provided</scope>
 					</dependency>
 				</dependencies>
 				<configuration>

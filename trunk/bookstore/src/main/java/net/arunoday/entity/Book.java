@@ -2,20 +2,15 @@
  * 
  */
 
-package net.arunoday.model;
-
-import java.util.HashSet;
-import java.util.Set;
+package net.arunoday.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.solr.analysis.LowerCaseFilterFactory;
-import org.apache.solr.analysis.SnowballPorterFilterFactory;
 import org.apache.solr.analysis.StandardTokenizerFactory;
 import org.hibernate.annotations.Type;
 import org.hibernate.search.annotations.Analyzer;
@@ -23,14 +18,13 @@ import org.hibernate.search.annotations.AnalyzerDef;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.IndexedEmbedded;
-import org.hibernate.search.annotations.Parameter;
 import org.hibernate.search.annotations.Store;
 import org.hibernate.search.annotations.TokenFilterDef;
 import org.hibernate.search.annotations.TokenizerDef;
 import org.joda.time.LocalDate;
 
 /**
+ * Represents Book Entity.
  * 
  * @author Aparna Chaudhary (aparna.chaudhary@gmail.com)
  */
@@ -38,20 +32,27 @@ import org.joda.time.LocalDate;
 @Entity
 @Table(name = "book")
 @Indexed
-@AnalyzerDef(name = "customanalyzer", tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class), filters = {
-        @TokenFilterDef(factory = LowerCaseFilterFactory.class),
-        @TokenFilterDef(factory = SnowballPorterFilterFactory.class, params = { @Parameter(name = "language", value = "English") }) })
+@AnalyzerDef(name = "customanalyzer", tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class), filters = { @TokenFilterDef(factory = LowerCaseFilterFactory.class) })
+// @TokenFilterDef(factory = SnowballPorterFilterFactory.class, params = { @Parameter(name = "language", value =
+// "English") })
 public class Book extends BasicEntity {
 
     @Column(name = "title")
     @NotNull
     @Size(min = 5, max = 30)
-    @Field(index = Index.TOKENIZED, store = Store.NO)
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     @Analyzer(definition = "customanalyzer")
     private String title;
 
     @Column(name = "isbn")
+    @Field(index = Index.TOKENIZED, store = Store.NO)
     private String isbn;
+
+    @Column(name = "categories")
+    @NotNull
+    @Field(index = Index.TOKENIZED, store = Store.YES)
+    @Analyzer(definition = "customanalyzer")
+    private String categories;
 
     @Column(name = "price")
     private float price;
@@ -65,10 +66,6 @@ public class Book extends BasicEntity {
 
     @Column(name = "page_count")
     private int pageCount;
-
-    @ManyToMany
-    @IndexedEmbedded
-    private Set<Author> authors = new HashSet<Author>();
 
     /**
 	 * 
@@ -185,12 +182,43 @@ public class Book extends BasicEntity {
         this.pageCount = pageCount;
     }
 
-    public Set<Author> getAuthors() {
-        return authors;
+    /**
+     * @return Returns the categories.
+     */
+    public String getCategories() {
+        return categories;
     }
 
-    public void setAuthors(Set<Author> authors) {
-        this.authors = authors;
+    /**
+     * @param categories The categories to set.
+     */
+    public void setCategories(String categories) {
+        this.categories = categories;
+    }
+
+    /**
+     * @param price The price to set.
+     */
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    /**
+     * @param pageCount The pageCount to set.
+     */
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "Book [bindingType=" + bindingType + ", isbn=" + isbn + ", pageCount=" + pageCount + ", price=" + price
+                + ", publishingDate=" + publishingDate + ", title=" + title + "]";
     }
 
 }

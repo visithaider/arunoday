@@ -15,7 +15,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import net.arunoday.model.BasicEntity;
+import net.arunoday.entity.BasicEntity;
 import net.arunoday.repository.ReadRepository;
 
 import org.springframework.stereotype.Repository;

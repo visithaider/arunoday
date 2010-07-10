@@ -2,7 +2,7 @@ package net.arunoday.web.book;
 
 import java.util.List;
 
-import net.arunoday.model.Book;
+import net.arunoday.entity.Book;
 import net.arunoday.repository.BookRepository;
 import net.arunoday.web.BasePage;
 
@@ -19,6 +19,10 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
+/**
+ *
+ * @author Aparna Chaudhary (aparna.chaudhary@gmail.com)
+ */
 @SuppressWarnings("serial")
 public class ListBooksPage extends BasePage {
 
@@ -44,6 +48,7 @@ public class ListBooksPage extends BasePage {
                 item.add(new Label("isbn"));
                 item.add(new Label("pageCount"));
                 item.add(new Label("price"));
+                item.add(new Label("categories"));
 
                 Link<Object> details = new Link<Object>("details") {
                     @Override
@@ -88,7 +93,7 @@ public class ListBooksPage extends BasePage {
     }
 
     @Override
-    protected IModel<?> getTitleModel() {
-        return new Model("ListBook");
+    protected IModel<String> getTitleModel() {
+        return new Model<String>("ListBook");
     }
 }

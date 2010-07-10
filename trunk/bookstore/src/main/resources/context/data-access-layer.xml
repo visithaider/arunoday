@@ -18,10 +18,11 @@
 	</bean>
 
 	<bean
-		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" /><!--
 	<bean
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
-	<bean
+
+	--><bean
 		class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor" />
 
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"

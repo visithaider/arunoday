@@ -14,21 +14,21 @@ import org.apache.wicket.model.Model;
 @SuppressWarnings("serial")
 public class SearchBooksPanel extends Panel {
 
-    public SearchBooksPanel(String id, final IModel searchBookModel) {
+    public SearchBooksPanel(String id, final IModel<String> searchBookModel) {
         super(id);
         setOutputMarkupId(true);
 
-        Form form = new Form("form") {
+        Form<String> form = new Form<String>("form") {
             protected void onSubmit() {
                 setResponsePage(new SearchBooksPage(searchBookModel));
             }
         };
         add(form);
-        TextField searchTerm = new TextField("searchTerm", searchBookModel);
+        TextField<String> searchTerm = new TextField<String>("searchTerm", searchBookModel);
         form.add(searchTerm);
     }
 
     public SearchBooksPanel(String id) {
-        this(id, new Model(""));
+        this(id, new Model<String>(""));
     }
 }

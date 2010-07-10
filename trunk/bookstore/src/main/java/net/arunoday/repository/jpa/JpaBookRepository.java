@@ -8,9 +8,10 @@ import java.util.List;
 
 import javax.persistence.TypedQuery;
 
-import net.arunoday.model.Book;
+import net.arunoday.entity.Book;
 import net.arunoday.repository.BookRepository;
 
+import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
@@ -31,6 +32,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository(value = "bookRepository")
 public class JpaBookRepository extends AbstractJpaReadWriteRepository<Book> implements BookRepository {
+
+    private static final Logger logger = Logger.getLogger(JpaBookRepository.class);
 
     protected JpaBookRepository() {
         super(Book.class);
@@ -87,21 +90,43 @@ public class JpaBookRepository extends AbstractJpaReadWriteRepository<Book> impl
      */
     @SuppressWarnings("unchecked")
     public List<Book> findBooks(String searchToken) {
-        
+
         FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(getEntityManager());
         // create native Lucene query
-        String[] fields = new String[] { "title", "authors.name", "publishingDate" };
+        String[] fields = new String[] { "title", "isbn", "categories", "publishingDate" };
         QueryParser parser = new MultiFieldQueryParser(Version.LUCENE_29, fields, new StandardAnalyzer(
                 Version.LUCENE_29));
-        Query query = null;
+        Query luceneQuery = null;
         try {
-            query = parser.parse(searchToken);
+            luceneQuery = parser.parse(searchToken);
         }
         catch (ParseException e) {
-            e.printStackTrace();
+            logger.error("Error during parsing lucene query: " + luceneQuery, e);
         }
         // wrap Lucene query in a javax.persistence.Query
-        FullTextQuery persistenceQuery = fullTextEntityManager.createFullTextQuery(query, Book.class);
+        FullTextQuery persistenceQuery = fullTextEntityManager.createFullTextQuery(luceneQuery, Book.class);
+        // execute search
+        return persistenceQuery.getResultList();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<String> findBookTitles(String searchToken) {
+        FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(getEntityManager());
+        // create native Lucene query
+        String[] fields = new String[] { "title", "isbn", "categories", "publishingDate" };
+        QueryParser parser = new MultiFieldQueryParser(Version.LUCENE_29, fields, new StandardAnalyzer(
+                Version.LUCENE_29));
+        Query luceneQuery = null;
+        try {
+            luceneQuery = parser.parse(searchToken);
+        }
+        catch (ParseException e) {
+            logger.error("Error during parsing lucene query: " + luceneQuery, e);
+        }
+        // wrap Lucene query in a javax.persistence.Query
+        FullTextQuery persistenceQuery = fullTextEntityManager.createFullTextQuery(luceneQuery, Book.class);
+        persistenceQuery.setProjection("title");
+
         // execute search
         return persistenceQuery.getResultList();
     }

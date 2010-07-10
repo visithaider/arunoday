@@ -13,6 +13,7 @@ import com.inmethod.grid.datagrid.DefaultDataGrid;
 /**
  * This panel displays the search results of the book to find.
  * 
+ * @author Aparna Chaudhary (aparna.chaudhary@gmail.com)
  */
 @SuppressWarnings("serial")
 public abstract class BooksSearchResultPanel extends Panel {
@@ -21,7 +22,7 @@ public abstract class BooksSearchResultPanel extends Panel {
      * @param id comp id (not null)
      * @param searchTermModel model that give the book title to search for
      */
-    public BooksSearchResultPanel(String id, IModel searchTermModel) {
+    public BooksSearchResultPanel(String id, IModel<BookDetachableModel> searchTermModel) {
         super(id);
         setOutputMarkupId(true);
         initGUI(searchTermModel);
@@ -32,10 +33,11 @@ public abstract class BooksSearchResultPanel extends Panel {
      * 
      * @param searchTermModel the model that contains the search term
      */
-    private void initGUI(IModel searchTermModel) {
+    private void initGUI(IModel<BookDetachableModel> searchTermModel) {
 
         DataGridFactory dataGridFactory = new DataGridFactory(new SearchBooksDataSource(searchTermModel));
         dataGridFactory.setItemSelectionChangedCallback(new ItemSelectionChangedCallback() {
+            @SuppressWarnings("unchecked")
             public void onItemSelectionChanged(AjaxRequestTarget target, IModel item) {
                 onBookSelect(target, (BookDetachableModel) item);
             }
@@ -45,6 +47,8 @@ public abstract class BooksSearchResultPanel extends Panel {
         dataGridFactory.addDefaultPropertyColumn("isbn", "isbn", 100, true, true);
         dataGridFactory.addDefaultPropertyColumn("price", "price", 100, false, false);
         dataGridFactory.addDefaultPropertyColumn("pageCount", "pageCount", 100, false, false);
+        dataGridFactory.addDefaultPropertyColumn("categories", "categories", 100, false, false);
+        
 
         DefaultDataGrid defaultDataGrid = dataGridFactory.createDefaultDataGrid("grid");
         defaultDataGrid.setCleanSelectionOnPageChange(true);
