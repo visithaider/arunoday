@@ -1,13 +1,3 @@
-/**
- * <TODO: Add Copyright>
- *
- * FILE        : Country.java
- *
- * PACKAGE     : in.verse.model
- *
- * CREATION DT : May 14, 2010
- */
-
 package net.arunoday.model;
 
 import javax.persistence.Column;
@@ -24,83 +14,76 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "country")
-public class Country extends BasicEntity {
+public class Country extends BaseEntity {
 
-	@Column(name = "code")
-	private String code;
+    @Column(name = "code")
+    private String code;
 
-	/**
-	 * Constructs a new Country. (Default empty constructor).
-	 */
-	public Country() {
-		this(null, null);
-	}
+    /**
+     * Constructs a new Country. (Default empty constructor).
+     */
+    public Country() {
+        this(null, null);
+    }
 
-	/**
-	 * Constructs a new Country with a given code and name.
-	 * 
-	 * @param code
-	 *            The code of the country (usually ISO-3166 code)
-	 */
-	public Country(String code) {
-		this(null, code);
-	}
+    /**
+     * Constructs a new Country with a given code and name.
+     * 
+     * @param code The code of the country (usually ISO-3166 code)
+     */
+    public Country(String code) {
+        this(null, code);
+    }
 
-	/**
-	 * Constructs a new Country with a given id, code and name.
-	 * 
-	 * @param id
-	 *            The id of the country.
-	 * @param code
-	 *            The code of the country (usually ISO-3166 code).
-	 */
-	public Country(Long id, String code) {
-		super(id);
-		this.code = code;
-	}
+    /**
+     * Constructs a new Country with a given id, code and name.
+     * 
+     * @param id The id of the country.
+     * @param code The code of the country (usually ISO-3166 code).
+     */
+    public Country(Long id, String code) {
+        super(id);
+        this.code = code;
+    }
 
-	// =========================================== Object Methods
-	// =======================================================
+    // =========================================== Object Methods ======================================================
 
-	@Override
-	protected boolean doEquals(Object o) {
-		if (o == null) {
-			return false;
-		}
-		if (o == this) {
-			return true;
-		}
-		if (o.getClass() != getClass()) {
-			return false;
-		}
-		Country other = (Country) o;
-		return new EqualsBuilder().append(getCode(), other.getCode())
-				.isEquals();
-	}
+    @Override
+    protected boolean doEquals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (o == this) {
+            return true;
+        }
+        if (o.getClass() != getClass()) {
+            return false;
+        }
+        Country other = (Country) o;
+        return new EqualsBuilder().append(getCode(), other.getCode()).isEquals();
+    }
 
-	protected int doHashCode() {
-		return new HashCodeBuilder().append(getCode()).toHashCode();
-	}
+    protected int doHashCode() {
+        return new HashCodeBuilder().append(getCode()).toHashCode();
+    }
 
-	// ============================================== Setter/Getter
-	// =====================================================
+    // ============================================== Setter/Getter ====================================================
 
-	/**
-	 * Returns the code of the country. Usually ISO-3166 code.
-	 * 
-	 * @return The code of the country.
-	 */
-	public String getCode() {
-		return code;
-	}
+    /**
+     * Returns the code of the country. Usually ISO-3166 code.
+     * 
+     * @return The code of the country.
+     */
+    public String getCode() {
+        return code;
+    }
 
-	/**
-	 * Sets the code of the country. Usually ISO-3166 code.
-	 * 
-	 * @param code
-	 *            the given country code.
-	 */
-	public void setCode(String code) {
-		this.code = code;
-	}
+    /**
+     * Sets the code of the country. Usually ISO-3166 code.
+     * 
+     * @param code the given country code.
+     */
+    public void setCode(String code) {
+        this.code = code;
+    }
 }

@@ -1,13 +1,3 @@
-/**
- * <TODO: Add Copyright>
- *
- * FILE        : JpaCountryDao.java
- *
- * PACKAGE     : in.verse.repository.jpa
- *
- * CREATION DT : May 14, 2010
- */
-
 package net.arunoday.repository.jpa;
 
 import javax.persistence.NoResultException;
@@ -30,9 +20,6 @@ public class JpaCountryRepository extends AbstractJpaReadWriteRepository<Country
         super(Country.class);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public Country getByCode(String code) {
         Query query = getEntityManager().createQuery("SELECT c FROM Country c WHERE c.code= :countryCode");
         query.setParameter("countryCode", code);

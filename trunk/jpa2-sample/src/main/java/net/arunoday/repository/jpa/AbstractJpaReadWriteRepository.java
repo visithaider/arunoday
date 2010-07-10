@@ -1,16 +1,6 @@
-/**
- * <TODO: Add Copyright>
- *
- * FILE        : AbstractJpaDao.java
- *
- * PACKAGE     : demo.repository.jpa
- *
- * CREATION DT : May 14, 2010
- */
-
 package net.arunoday.repository.jpa;
 
-import net.arunoday.model.BasicEntity;
+import net.arunoday.model.BaseEntity;
 import net.arunoday.repository.ReadWriteRepository;
 
 import org.springframework.stereotype.Repository;
@@ -21,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * @author Aparna Chaudhary ( aparna.chaudhary@gmail.com )
  */
 @Repository
-public abstract class AbstractJpaReadWriteRepository<T extends BasicEntity> extends AbstractJpaReadRepository<T>
+public abstract class AbstractJpaReadWriteRepository<T extends BaseEntity> extends AbstractJpaReadRepository<T>
         implements ReadWriteRepository<T> {
 
     /**
