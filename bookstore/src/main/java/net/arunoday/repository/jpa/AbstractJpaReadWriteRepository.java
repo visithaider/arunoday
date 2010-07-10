@@ -10,7 +10,7 @@
 
 package net.arunoday.repository.jpa;
 
-import net.arunoday.model.BasicEntity;
+import net.arunoday.entity.BasicEntity;
 import net.arunoday.repository.ReadWriteRepository;
 
 import org.springframework.stereotype.Repository;

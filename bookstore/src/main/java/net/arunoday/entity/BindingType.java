@@ -2,7 +2,7 @@
  * 
  */
 
-package net.arunoday.model;
+package net.arunoday.entity;
 
 /**
  * 

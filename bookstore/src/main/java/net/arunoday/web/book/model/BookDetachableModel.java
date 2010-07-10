@@ -4,7 +4,7 @@
 
 package net.arunoday.web.book.model;
 
-import net.arunoday.model.Book;
+import net.arunoday.entity.Book;
 import net.arunoday.repository.BookRepository;
 
 import org.apache.wicket.injection.web.InjectorHolder;
@@ -15,6 +15,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
  * 
  * @author Aparna Chaudhary (aparna.chaudhary@gmail.com)
  */
+@SuppressWarnings("unchecked")
 public class BookDetachableModel extends LoadableDetachableModel {
 
     @SpringBean

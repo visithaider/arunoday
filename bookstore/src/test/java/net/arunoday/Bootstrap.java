@@ -15,10 +15,22 @@ public class Bootstrap {
         ApplicationContext context = new ClassPathXmlApplicationContext(new String[] {
                 "context/applicationContext.xml", "context/data-access-layer.xml" });
 
-        BookRepository bookRepository = (BookRepository) context.getBean("bookRepository");
-        logger.info(bookRepository.findAll().size());
+        BookRepository bookRepository = context.getBean("bookRepository", BookRepository.class);
+        // logger.info(bookRepository.findAll().size());
 
-        logger.info(bookRepository.findBooks("aparna").size());
+        // logger.info(bookRepository.findBooks("aparna").size());
+
+        // EntityManagerFactory emf = (EntityManagerFactory) context.getBean("entityManagerFactory");
+        // EntityManager entityManager = emf.createEntityManager();
+        // FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
+        // try {
+        // fullTextEntityManager.createIndexer().startAndWait();
+        // }
+        // catch (InterruptedException e) {
+        // logger.error("Indexing of data failed", e);
+        // }
+
+        logger.info(bookRepository.findBookTitles("action"));
 
         // Book book = new Book("New Book");
         // bookRepository.save(book);

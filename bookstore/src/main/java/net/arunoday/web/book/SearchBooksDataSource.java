@@ -2,7 +2,7 @@ package net.arunoday.web.book;
 
 import java.util.List;
 
-import net.arunoday.model.Book;
+import net.arunoday.entity.Book;
 import net.arunoday.repository.BookRepository;
 
 import org.apache.wicket.injection.web.InjectorHolder;

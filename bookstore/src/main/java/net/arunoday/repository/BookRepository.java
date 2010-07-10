@@ -6,7 +6,7 @@ package net.arunoday.repository;
 
 import java.util.List;
 
-import net.arunoday.model.Book;
+import net.arunoday.entity.Book;
 
 /**
  * Repository interface for Book entity
@@ -38,5 +38,8 @@ public interface BookRepository extends ReadWriteRepository<Book> {
      * @return books that matches the given search token
      */
     List<Book> findBooks(String searchToken);
+    
+    List<String> findBookTitles(String searchToken);
+
 
 }

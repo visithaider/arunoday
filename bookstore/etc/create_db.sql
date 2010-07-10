@@ -50,17 +50,19 @@ CREATE TABLE `book` (
   `price` float DEFAULT NULL,
   `publishing_date` tinyblob,
   `title` varchar(255) DEFAULT NULL,
+  `categories` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 LOCK TABLES `book` WRITE;
-INSERT INTO `book` (`id`,`version`,`binding_type`,`isbn`,`page_count`,`price`,`publishing_date`,`title`)
+INSERT INTO `book` (`id`,`version`,`binding_type`,`isbn`,`page_count`,`price`,`publishing_date`,`title`,`categories`)
 VALUES
-	(1,0,0,'111-2',120,200,NULL,'Java Concurrency in Practice'),
-	(2,0,1,'123456',500,1000,NULL,'DDD'),
-	(3,0,0,'46567567',234,456,NULL,'Scala Programming'),
-	(4,0,1,'8908009-3',700,400,NULL,'Grails in Action'),
-	(5,0,0,'234243-89',600,800,NULL,'GWT in Action');
+	(1,0,0,'111-2',120,200,NULL,'Java Concurrency in Practice','Java, Scalability'),
+	(2,0,1,'123456',500,1000,NULL,'DDD','Java, Modelling'),
+	(3,0,0,'46567567',234,456,NULL,'Scala Programming', 'Java, JVM Languages'),
+	(4,0,1,'8908009-3',700,400,NULL,'Grails in Action','JVM Languages'),
+	(5,0,0,'234243-89',600,800,NULL,'GWT in Action', 'RIA, Component Based'),
+	(6,0,0,'234243-89',600,800,NULL,'Wicket in Action', 'Web2.0, Component Based');
 
 UNLOCK TABLES;
 

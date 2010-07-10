@@ -3,7 +3,7 @@
  *
  */
 
-package net.arunoday.model;
+package net.arunoday.entity;
 
 import java.io.Serializable;
 

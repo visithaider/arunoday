@@ -2,7 +2,7 @@ package net.arunoday.web.book;
 
 import java.util.HashMap;
 
-import net.arunoday.model.Book;
+import net.arunoday.entity.Book;
 import net.arunoday.web.BasePage;
 import net.arunoday.web.book.model.BookDetachableModel;
 

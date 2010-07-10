@@ -1,6 +1,6 @@
 package net.arunoday.web.book;
 
-import net.arunoday.model.Book;
+import net.arunoday.entity.Book;
 import net.arunoday.repository.BookRepository;
 import net.arunoday.web.BasePage;
 
@@ -12,6 +12,11 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.annotation.mount.MountPath;
 import org.wicketstuff.annotation.strategy.MountMixedParam;
 
+/**
+ * Wicket page to display book details.
+ * 
+ * @author Aparna Chaudhary (aparna.chaudhary@gmail.com)
+ */
 @MountPath(path = "books")
 @MountMixedParam(parameterNames = { "id" })
 public class BookDetailPage extends BasePage {
@@ -32,8 +37,8 @@ public class BookDetailPage extends BasePage {
     }
 
     @Override
-    protected IModel<?> getTitleModel() {
-        return new Model("BookDetails");
+    protected IModel<String> getTitleModel() {
+        return new Model<String>("BookDetails");
     }
 
 }
