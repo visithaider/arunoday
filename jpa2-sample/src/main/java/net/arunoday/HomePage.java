@@ -1,8 +1,8 @@
 package net.arunoday;
 
-
 import net.arunoday.repository.CountryRepository;
 
+import org.apache.log4j.Logger;
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
@@ -13,28 +13,26 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
  */
 public class HomePage extends WebPage {
 
-	private static final long serialVersionUID = 1L;
+    private static final Logger logger = Logger.getLogger(HomePage.class);
 
-	// TODO Add any page properties or variables here
-	@SpringBean
-	private CountryRepository countryDao; 
+    private static final long serialVersionUID = 1L;
+
+    @SpringBean
+    private CountryRepository countryDao;
 
     /**
-	 * Constructor that is invoked when page is invoked without a session.
-	 * 
-	 * @param parameters
-	 *            Page parameters
-	 */
+     * Constructor that is invoked when page is invoked without a session.
+     * 
+     * @param parameters Page parameters
+     */
     public HomePage(final PageParameters parameters) {
 
-        // Add the simplest type of label
         add(new Label("message", "If you see this message wicket is properly configured and running"));
-        if(countryDao != null){
+        if (countryDao != null) {
             countryDao.findAll();
-        }else{
-        	System.err.println("No Bean");
         }
-
-        // TODO Add your page's components here
+        else {
+            logger.error("No Bean found for countruDao");
+        }
     }
 }

@@ -8,7 +8,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Bootstrap {
 
-    /** The log4j logger for this class. */
     private static final Logger logger = Logger.getLogger(Bootstrap.class);
 
     public static void main(String[] args) {
