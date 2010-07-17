@@ -1,13 +1,11 @@
 #labels springintegration,twitter4j
-
 = Introduction =
 
-Add your content here.
-
+A sample app developed using Spring Integration and Twitter4J.
 
 = Details =
 
-Demonstrates the use of different Spring Integration patterns along with Tiwtter4J.
+Demonstrates the use of different Spring Integration patterns.
 
 = Source Code =
 
