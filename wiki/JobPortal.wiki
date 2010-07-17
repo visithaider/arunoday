@@ -1,6 +1,5 @@
+#summary Job Portal for Employers and Job Seekers.
 #labels grails
-
-Job Portal for Employers and Job Seekers.
 
 = Introduction =
 
