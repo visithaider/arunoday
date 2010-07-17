@@ -1,4 +1,6 @@
+#summary Twitter App with Spring Integration
 #labels springintegration,twitter4j
+
 = Introduction =
 
 A sample app developed using Spring Integration and Twitter4J.
