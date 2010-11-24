@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions id="definitions"
+	xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn"
+	targetNamespace="http://www.activiti.org/bpmn2.0">
+
+	<process id="DefectTracking">
+
+		<startEvent id="theStart" />
+
+		<sequenceFlow sourceRef="theStart" targetRef="reviewDefect" />
+
+		<userTask name="reviewDefect" id="reviewDefect">
+			<documentation>
+				The assignee will review the defect.
+			</documentation>
+			<humanPerformer>
+				<resourceAssignmentExpression>
+					<formalExpression>#{assignee}</formalExpression>
+				</resourceAssignmentExpression>
+			</humanPerformer>
+		</userTask>
+
+		<sequenceFlow sourceRef="reviewDefect" targetRef="findAssignee" />
+
+		<serviceTask id="findAssignee"
+			activiti:class="net.arunoday.activiti.demo.handler.CheckAssignee" />
+
+		<sequenceFlow sourceRef="findAssignee" targetRef="resolveDefect" />
+
+		<userTask name="resolveDefect" id="resolveDefect">
+			<documentation>
+				The assignee will resolve the defect.
+			</documentation>
+			<humanPerformer>
+				<resourceAssignmentExpression>
+					<formalExpression>#{assignee}</formalExpression>
+				</resourceAssignmentExpression>
+			</humanPerformer>
+		</userTask>
+
+		<sequenceFlow sourceRef="resolveDefect" targetRef="theEnd" />
+
+		<endEvent id="theEnd" />
+
+	</process>
+</definitions>
