@@ -19,8 +19,17 @@
 				</resourceAssignmentExpression>
 			</humanPerformer>
 		</userTask>
+		
+		<!-- If the defect is not reviewed in one minute, the process is terminated. -->
+		<boundaryEvent id="escalationTimer" cancelActivity="true"
+			attachedToRef="reviewDefect">
+			<timerEventDefinition>
+				<timeDuration>PT1M</timeDuration>
+			</timerEventDefinition>
+		</boundaryEvent>
 
 		<sequenceFlow sourceRef="reviewDefect" targetRef="findAssignee" />
+		<sequenceFlow sourceRef="escalationTimer" targetRef="theEnd" />
 
 		<serviceTask id="findAssignee"
 			activiti:class="net.arunoday.activiti.demo.handler.CheckAssignee" />
