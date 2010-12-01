@@ -302,7 +302,7 @@
 	</build>
 	
 	<properties>
-		<activiti.version>5.0.rc1</activiti.version>
+		<activiti.version>5.0</activiti.version>
 		<wicket.version>1.4.13</wicket.version>
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<spring.integration.version>2.0.0.RELEASE</spring.integration.version>
